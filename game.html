@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naughty Card Flip Game</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #2d0035, #ff0080);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 30px 10px;
+      color: white;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 12px #ff69b4;
+      margin-bottom: 30px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .card {
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      padding-top: 130%;
+      transform-style: preserve-3d;
+      transition: transform 0.7s;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      backface-visibility: hidden;
+      box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 10px;
+    }
+
+    .card-front {
+      background-color: #000;
+    }
+
+    .card-front img {
+      width: 80px;
+      height: 80px;
+      filter: invert(1);
+      margin-bottom: 10px;
+    }
+
+    .card-front p {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .card-back {
+      background-color: #fff;
+      color: #cc0066;
+      transform: rotateY(180deg);
+      font-weight: bold;
+      text-align: center;
+      padding: 20px;
+      font-size: 1.1rem;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      text-align: center;
+      color: #ffeef5;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💗 Flip for Tonight’s Surprise 💗</h1>
+  <div class="card-grid" id="cardGrid"></div>
+  <div class="footer">For your special 2-hour magical date 🚋</div>
+
+  <script>
+    const positions = [
+      {
+        name: "Missionary with Deep Eye Contact",
+        image: "https://i.imgur.com/SlSoZVk.png"
+      },
+      {
+        name: "Cowgirl – You Ride Me Slow 😈",
+        image: "https://i.imgur.com/QTvk5vM.png"
+      },
+      {
+        name: "Doggy Style – Pull My Hair 💥",
+        image: "https://i.imgur.com/WGkZ3hw.png"
+      },
+      {
+        name: "Blowjob – Morning Wake Up 🌞",
+        image: "https://i.imgur.com/D6X1m8u.png"
+      },
+      {
+        name: "Spooning from Behind 💑",
+        image: "https://i.imgur.com/FR3zFFl.png"
+      },
+      {
+        name: "Wall Kiss & Lift 💦",
+        image: "https://i.imgur.com/0Xb4GmL.png"
+      },
+      {
+        name: "Standing Doggy Surprise 🙀",
+        image: "https://i.imgur.com/k9GxG5n.png"
+      },
+      {
+        name: "Reverse Cowgirl – Show Me Everything 🔥",
+        image: "https://i.imgur.com/nUqKmd1.png"
+      },
+      {
+        name: "Bed Edge Style – Legs on Shoulder 🙵️‍♂️",
+        image: "https://i.imgur.com/kzrQ2Gj.png"
+      }
+    ];
+
+    const grid = document.getElementById("cardGrid");
+
+    positions.forEach(pos => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <img src="${pos.image}" alt="Shadow Pose" />
+            <p>Tap Me 🔥</p>
+          </div>
+          <div class="card-face card-back">${pos.name}</div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+      });
+
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
